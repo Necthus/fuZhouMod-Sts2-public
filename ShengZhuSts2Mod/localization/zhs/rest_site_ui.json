@@ -1,0 +1,12 @@
+{
+  "OPTION_MONKEY_TALISMAN_TRANSFORM.name": "七十二变",
+  "OPTION_MONKEY_TALISMAN_TRANSFORM.title": "七十二变",
+  "OPTION_MONKEY_TALISMAN_TRANSFORM.description": "选择卡组中一张牌，将其变化为当前角色卡池中的任意一张牌。",
+  "OPTION_MONKEY_TALISMAN_TRANSFORM.selectTarget": "选择要进行七十二变的牌。",
+  "OPTION_MONKEY_TALISMAN_TRANSFORM.selectReplacement": "选择变化后的牌。不选牌直接确认则取消本次七十二变。",
+  "OPTION_PAN_KU_ENCHANT.name": "附魔",
+  "OPTION_PAN_KU_ENCHANT.title": "附魔",
+  "OPTION_PAN_KU_ENCHANT.description": "选择寄宿魔气，将其附魔到卡组中的一张牌。",
+  "OPTION_PAN_KU_ENCHANT.selectQi": "选择寄宿在潘库宝盒里的魔气。",
+  "OPTION_PAN_KU_ENCHANT.selectTarget": "选择要附魔的牌。可附魔类型：{EnchantTargetType}。"
+}

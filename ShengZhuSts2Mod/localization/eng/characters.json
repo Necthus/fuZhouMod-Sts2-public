@@ -1,0 +1,16 @@
+{
+  "SHENGZHUSTS2MOD-SHENG_ZHU.title": "Shendu",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.titleObject": "Shendu",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.description": "An ancient demon leader, one of the eight Demon Sorcerers. He is searching for his twelve lost Talismans.",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.pronounObject": "him",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.possessiveAdjective": "his",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.pronounPossessive": "his",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.pronounSubject": "he",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.goldMonologue": "Gold is only useful when it buys victory.",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.eventDeathPrevention": "Shendu refuses to fall.",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.aromaPrinciple": "Command",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.cardsModifierTitle": "Shendu Cards",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.cardsModifierDescription": "Adds Shendu cards to the run.",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.banter.alive.endTurnPing": "Submit, or be destroyed.",
+  "SHENGZHUSTS2MOD-SHENG_ZHU.banter.dead.endTurnPing": "This is not the end."
+}

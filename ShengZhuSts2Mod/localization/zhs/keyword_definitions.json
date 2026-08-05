@@ -1,0 +1,129 @@
+[
+  {
+    "ID": "AfuMove",
+    "PROPER_NAME": "阿福招式",
+    "NAMES": ["阿福招式", "阿福"],
+    "DESCRIPTION": "由黑手党大将阿福使出的威猛招式。"
+  },
+  {
+    "ID": "Combo",
+    "PROPER_NAME": "阿福连招",
+    "NAMES": ["阿福连招", "连招"],
+    "DESCRIPTION": "如果你本回合上一张打出的牌是阿福招式，触发额外效果。"
+  },
+  {
+    "ID": "BlackHandMark",
+    "PROPER_NAME": "黑手",
+    "NAMES": ["黑手"],
+    "DESCRIPTION": "黑手帮施加的标记。部分黑手帮卡牌会根据层数触发额外效果，并可消耗其层数。"
+  },
+  {
+    "ID": "BlackHandCard",
+    "PROPER_NAME": "黑手帮",
+    "NAMES": ["黑手帮"],
+    "DESCRIPTION": "黑手帮系列卡牌。部分效果会施加或利用黑手标记。"
+  },
+  {
+    "ID": "Mask",
+    "PROPER_NAME": "面具",
+    "NAMES": ["面具"],
+    "DESCRIPTION": "黑影兵团面具。面具能力会在战斗中持续生成对应的黑影兵团牌。"
+  },
+  {
+    "ID": "Shadowkhan",
+    "PROPER_NAME": "黑影兵团",
+    "NAMES": ["黑影兵团"],
+    "DESCRIPTION": "黑影兵团系列卡牌默认消耗，其伤害或格挡会受影噬影响。"
+  },
+  {
+    "ID": "Dominion",
+    "PROPER_NAME": "影噬",
+    "NAMES": ["影噬"],
+    "DESCRIPTION": "黑影兵团卡不再受力量与敏捷影响，改为受影噬影响。每1层影噬，使黑影兵团卡造成的伤害或获得的格挡+1。"
+  },
+  {
+    "ID": "Curse",
+    "PROPER_NAME": "诅咒",
+    "NAMES": ["诅咒"],
+    "DESCRIPTION": "目标被诅咒标记。当诅咒层数 >= 目标当前生命值时，立即斩杀。部分黑影兵团牌会根据诅咒层数触发额外效果（如刺刃团伤害+25%、夜蝠团恢复HP）。"
+  },
+  {
+    "ID": "Flight",
+    "PROPER_NAME": "飞行",
+    "NAMES": ["飞行"],
+    "DESCRIPTION": "受到的下一次伤害减半。"
+  },
+  {
+    "ID": "DarkWarrior",
+    "PROPER_NAME": "黑暗杀手",
+    "NAMES": ["黑暗杀手"],
+    "DESCRIPTION": "刀龙麾下的黑暗杀手系列卡牌。"
+  },
+  {
+    "ID": "Soaked",
+    "PROPER_NAME": "潮湿",
+    "NAMES": ["潮湿", "湿润"],
+    "DESCRIPTION": "目标处于潮湿状态，水火不容，但雷电和寒气在潮湿状态下会有额外效果。"
+  },
+  {
+    "ID": "Steam",
+    "PROPER_NAME": "高温蒸汽",
+    "NAMES": ["高温蒸汽"],
+    "DESCRIPTION": "火水合成后的异常。目标回合开始时，每层有 1/8 概率干扰其行动；干扰成功时跳过行动且不造成伤害，干扰失败时受到当前生命值 1/5 的伤害（单次最低 5，单人最高 40）。联机时伤害上限随玩家人数提高；解除限制期间跳过最高上限。"
+  },
+  {
+    "ID": "Burning",
+    "PROPER_NAME": "灼烧",
+    "NAMES": ["灼烧", "烧伤"],
+    "DESCRIPTION": "回合开始时受到当前生命值 1/8 的伤害（单次最低 2，单人最高 20），联机时上限随玩家人数提高；解除限制期间跳过最高上限。每满 9 层会变成 3 层灼心，余数保留。"
+  },
+  {
+    "ID": "BurningHeart",
+    "PROPER_NAME": "灼心",
+    "NAMES": ["灼心"],
+    "DESCRIPTION": "由灼烧进化而来的更强异常，回合开始时受到当前生命值 1/5 的伤害（单次最低 5，单人最高 40）。联机时上限随玩家人数提高；解除限制期间跳过最高上限。"
+  },
+  {
+    "ID": "Frostbite",
+    "PROPER_NAME": "冻伤",
+    "NAMES": ["冻伤", "寒气"],
+    "DESCRIPTION": "回合开始时受到当前生命值 1/8 的伤害（单次最低 2，单人最高 20），联机时上限随玩家人数提高；解除限制期间跳过最高上限。每满 9 层会变成 3 层冰狱，余数保留。"
+  },
+  {
+    "ID": "FrostHell",
+    "PROPER_NAME": "冰狱",
+    "NAMES": ["冰狱"],
+    "DESCRIPTION": "由冻伤进化而来的更强异常，回合开始时受到当前生命值 1/5 的伤害（单次最低 5，单人最高 40）。联机时上限随玩家人数提高；解除限制期间跳过最高上限。"
+  },
+  {
+    "ID": "Fear",
+    "PROPER_NAME": "恐惧",
+    "NAMES": ["恐惧"],
+    "DESCRIPTION": "感到恐惧。目标回合开始时获得格挡并跳过本次行动，然后移除此状态。"
+  },
+  {
+    "ID": "EarthBind",
+    "PROPER_NAME": "地缚",
+    "NAMES": ["地缚"],
+    "DESCRIPTION": "由地之恶魔施加的异常。回合开始时受到当前生命值 1/8 的伤害。遇到潮湿时转化为沉重泥沼。该效果不会随回合自动减少，仅在玩家受到生命伤害时解除。"
+  },
+  {
+    "ID": "HeavyMire",
+    "PROPER_NAME": "沉重泥沼",
+    "NAMES": ["沉重泥沼"],
+    "DESCRIPTION": "融合了地缚与潮湿的强化异常。每回合开始失去 1/5 当前生命值（单次最低 5，单人最高 40），联机时上限随玩家人数提高；解除限制期间跳过最高上限。并减少 2 点力量，该效果不会随回合自然减少，移除时返还由此扣除的力量。"
+  },
+  {
+    "ID": "WindCatalyst",
+    "PROPER_NAME": "风势",
+    "NAMES": ["风势"],
+    "DESCRIPTION": "加速元素反应。敌人回合开始时，额外结算其持有的灼烧、灼心、冻伤或冰狱的伤害。敌人回合结束时，这些状态额外减少 1 层。层数每回合自然减少 1 层。"
+  },
+  {
+    "ID": "DemonAnomaly",
+    "PROPER_NAME": "恶魔异常",
+    "NAMES": ["恶魔异常"],
+    "EXTRA": ["Burning", "BurningHeart", "Soaked", "Steam", "Frostbite", "FrostHell", "EarthBind", "HeavyMire", "WindCatalyst", "Fear"],
+    "DESCRIPTION": "八大恶魔相关异常，包括灼烧、灼心、潮湿、高温蒸汽、冻伤、冰狱、地缚、沉重泥沼、风势和恐惧。"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "MASK_ORB.title": "面具",
+  "MASK_ORB.description": "当前装载的面具。每回合开始时按层数生成对应的黑影兵团牌。",
+  "MASK_ORB.smartDescription": "当前装载的面具（{Passive}层）。每回合开始时生成对应的黑影兵团牌。",
+  "EMPTY_MASK_ORB.title": "空面具槽",
+  "EMPTY_MASK_ORB.description": "空的面具栏位。装载面具后将显示面具效果。",
+  "EMPTY_MASK_ORB.smartDescription": "空的面具栏位。装载面具后将显示面具效果。"
+}

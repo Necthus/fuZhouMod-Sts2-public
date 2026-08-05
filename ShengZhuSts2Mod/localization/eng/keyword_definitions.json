@@ -1,0 +1,129 @@
+[
+  {
+    "ID": "AfuMove",
+    "PROPER_NAME": "Ah Fu Move",
+    "NAMES": ["Ah Fu Move", "Ah Fu"],
+    "DESCRIPTION": "Powerful moves performed by the Dark Hand's general, Ah Fu."
+  },
+  {
+    "ID": "Combo",
+    "PROPER_NAME": "Ah Fu Combo",
+    "NAMES": ["Ah Fu Combo", "Combo"],
+    "DESCRIPTION": "If the last card played this turn was an Ah Fu Move, trigger an additional effect."
+  },
+  {
+    "ID": "BlackHandMark",
+    "PROPER_NAME": "Blackhand",
+    "NAMES": ["Blackhand", "blackhand"],
+    "DESCRIPTION": "A mark applied by Dark Hand cards. Some Dark Hand cards gain extra effects based on stacks and can consume those stacks."
+  },
+  {
+    "ID": "BlackHandCard",
+    "PROPER_NAME": "Dark Hand",
+    "NAMES": ["Dark Hand"],
+    "DESCRIPTION": "Dark Hand series cards. Some effects apply or use Blackhand marks."
+  },
+  {
+    "ID": "Mask",
+    "PROPER_NAME": "Mask",
+    "NAMES": ["Mask"],
+    "DESCRIPTION": "A Shadowkhan mask. Mask powers continuously generate corresponding Shadowkhan cards during combat."
+  },
+  {
+    "ID": "Shadowkhan",
+    "PROPER_NAME": "Shadowkhan",
+    "NAMES": ["Shadowkhan"],
+    "DESCRIPTION": "Shadowkhan series cards Exhaust by default. Their damage or block is affected by Dominion."
+  },
+  {
+    "ID": "Dominion",
+    "PROPER_NAME": "Dominion",
+    "NAMES": ["Dominion"],
+    "DESCRIPTION": "Shadowkhan cards are no longer affected by Strength and Dexterity. Instead, each stack of Dominion grants +1 damage or +1 block to Shadowkhan cards."
+  },
+  {
+    "ID": "Curse",
+    "PROPER_NAME": "Curse",
+    "NAMES": ["Curse"],
+    "DESCRIPTION": "The target is cursed. When Curse stacks >= target's current HP, instantly kill the target. Some Shadowkhan cards gain extra effects based on Curse stacks (e.g. Blade-khan deals +25% damage, Bat-khan heals HP)."
+  },
+  {
+    "ID": "Flight",
+    "PROPER_NAME": "Flight",
+    "NAMES": ["Flight"],
+    "DESCRIPTION": "Reduces the next damage taken by half."
+  },
+  {
+    "ID": "DarkWarrior",
+    "PROPER_NAME": "Dark Warrior",
+    "NAMES": ["Dark Warrior"],
+    "DESCRIPTION": "Dark Warrior series cards serving Daolon Wong."
+  },
+  {
+    "ID": "Soaked",
+    "PROPER_NAME": "Wet",
+    "NAMES": ["Wet"],
+    "DESCRIPTION": "The target is in a wet state. Incompatible with fire, but Lightning and Frost have additional effects under the wet state."
+  },
+  {
+    "ID": "Steam",
+    "PROPER_NAME": "High Temp Steam",
+    "NAMES": ["High Temp Steam"],
+    "DESCRIPTION": "An anomaly fused from fire and water. At the target's turn start, each stack has a 1/8 chance to disrupt its action. If disrupted, it skips the action and takes no damage; if not disrupted, it takes 1/5 of current HP as damage (minimum 5, solo maximum 40 per trigger). In multiplayer, the cap increases with player count; during Uncap, the maximum cap is ignored."
+  },
+  {
+    "ID": "Burning",
+    "PROPER_NAME": "Burning",
+    "NAMES": ["Burning"],
+    "DESCRIPTION": "At the start of the turn, take 1/8 of current HP as damage (minimum 2, solo maximum 20 per trigger). In multiplayer, the cap increases with player count; during Uncap, the maximum cap is ignored. Every 9 stacks become 3 stacks of Burning Heart, keeping the remainder."
+  },
+  {
+    "ID": "BurningHeart",
+    "PROPER_NAME": "Burning Heart",
+    "NAMES": ["Burning Heart"],
+    "DESCRIPTION": "A stronger anomaly evolved from Burning. At the start of the turn, take 1/5 of current HP as damage (minimum 5, solo maximum 40 per trigger). In multiplayer, the cap increases with player count; during Uncap, the maximum cap is ignored."
+  },
+  {
+    "ID": "Frostbite",
+    "PROPER_NAME": "Frostbite",
+    "NAMES": ["Frostbite"],
+    "DESCRIPTION": "At the start of the turn, take 1/8 of current HP as damage (minimum 2, solo maximum 20 per trigger). In multiplayer, the cap increases with player count; during Uncap, the maximum cap is ignored. Every 9 stacks become 3 stacks of Frost Hell, keeping the remainder."
+  },
+  {
+    "ID": "FrostHell",
+    "PROPER_NAME": "Frost Hell",
+    "NAMES": ["Frost Hell"],
+    "DESCRIPTION": "A stronger anomaly evolved from Frostbite. At the start of the turn, take 1/5 of current HP as damage (minimum 5, solo maximum 40 per trigger). In multiplayer, the cap increases with player count; during Uncap, the maximum cap is ignored."
+  },
+  {
+    "ID": "Fear",
+    "PROPER_NAME": "Fear",
+    "NAMES": ["Fear"],
+    "DESCRIPTION": "The target is afraid. At the target's turn start, it gains Block, skips its action, then removes this status."
+  },
+  {
+    "ID": "EarthBind",
+    "PROPER_NAME": "Earth Bind",
+    "NAMES": ["Earth Bind"],
+    "DESCRIPTION": "An anomaly applied by the Earth Demon. At the start of the turn, take 1/8 of current HP as damage. Turns into Heavy Mire when it meets Wet. This effect does not automatically decrease over turns and is only removed when the player takes HP damage."
+  },
+  {
+    "ID": "HeavyMire",
+    "PROPER_NAME": "Heavy Mire",
+    "NAMES": ["Heavy Mire"],
+    "DESCRIPTION": "A reinforced anomaly that fuses Earth Bind and Wet. Lose 1/5 of current HP at the start of each turn (minimum 5, solo maximum 40 per trigger). In multiplayer, the cap increases with player count; during Uncap, the maximum cap is ignored. Also decreases 2 Strength, does not naturally decrease over turns, and returns the Strength lost this way when removed."
+  },
+  {
+    "ID": "WindCatalyst",
+    "PROPER_NAME": "Wind Catalyst",
+    "NAMES": ["Wind Catalyst"],
+    "DESCRIPTION": "Accelerates elemental reactions. At the start of the enemy's turn, trigger the damage of Burning, Burning Heart, Frostbite, or Frost Hell they possess. At the end of the enemy's turn, these states decrease by an additional 1 stack. Stacks naturally decrease by 1 every turn."
+  },
+  {
+    "ID": "DemonAnomaly",
+    "PROPER_NAME": "Demon Debuffs",
+    "NAMES": ["Demon debuffs", "Demon debuff"],
+    "EXTRA": ["Burning", "BurningHeart", "Soaked", "Steam", "Frostbite", "FrostHell", "EarthBind", "HeavyMire", "WindCatalyst", "Fear"],
+    "DESCRIPTION": "Eight Demon anomalies, including Burning, Burning Heart, Wet, High Temp Steam, Frostbite, Frost Hell, Earth Bind, Heavy Mire, Wind Catalyst, and Fear."
+  }
+]

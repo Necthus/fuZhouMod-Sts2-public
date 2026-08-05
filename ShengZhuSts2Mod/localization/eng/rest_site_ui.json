@@ -1,0 +1,12 @@
+{
+  "OPTION_MONKEY_TALISMAN_TRANSFORM.name": "72 Transformations",
+  "OPTION_MONKEY_TALISMAN_TRANSFORM.title": "72 Transformations",
+  "OPTION_MONKEY_TALISMAN_TRANSFORM.description": "Choose a card from your deck, then transform it into any card from your current character's card pool.",
+  "OPTION_MONKEY_TALISMAN_TRANSFORM.selectTarget": "Choose a card for 72 Transformations.",
+  "OPTION_MONKEY_TALISMAN_TRANSFORM.selectReplacement": "Choose the transformed card. Confirm without choosing a card to cancel 72 Transformations.",
+  "OPTION_PAN_KU_ENCHANT.name": "Enchant",
+  "OPTION_PAN_KU_ENCHANT.title": "Enchant",
+  "OPTION_PAN_KU_ENCHANT.description": "Choose stored Demon Qi and enchant a card in your deck.",
+  "OPTION_PAN_KU_ENCHANT.selectQi": "Choose Demon Qi stored in the Pan Ku Box.",
+  "OPTION_PAN_KU_ENCHANT.selectTarget": "Choose a card to enchant. Valid targets: {EnchantTargetType}."
+}

@@ -1,0 +1,8 @@
+{
+  "MASK_ORB.title": "Mask",
+  "MASK_ORB.description": "A loaded mask. Generates Shadow Khan cards at the start of each turn based on stacks.",
+  "MASK_ORB.smartDescription": "A loaded mask ({Passive} stacks). Generates Shadow Khan cards at the start of each turn.",
+  "EMPTY_MASK_ORB.title": "Empty Mask Slot",
+  "EMPTY_MASK_ORB.description": "An empty mask slot. Load a mask to activate its effect.",
+  "EMPTY_MASK_ORB.smartDescription": "An empty mask slot. Load a mask to activate its effect."
+}
