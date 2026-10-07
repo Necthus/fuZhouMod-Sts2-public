@@ -2,6 +2,7 @@ using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Runs;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Helpers;
+using ShengZhuSts2Mod.ShengZhuSts2ModCode.Services;
 
 namespace ShengZhuSts2Mod.ShengZhuSts2ModCode.Events;
 
@@ -16,13 +17,13 @@ public class ShivaBraceletEvent : CustomEventModel
     public override string? CustomInitialPortraitPath => $"{MainFile.ResPath}/images/events/shiva_bracelet_event.png";
 
     /// <summary>
-    /// 事件全角色可见。
+    /// 圣主跑团遵循选人事件勾选和幕数；其它角色保留原有自然出现条件。
     /// </summary>
     /// <param name="runState">当前爬塔状态。</param>
-    /// <returns>始终返回 true。</returns>
+    /// <returns>当前跑团配置允许时返回 true。</returns>
     public override bool IsAllowed(IRunState runState)
     {
-        return true;
+        return StoryEventReplacementConfigService.IsStoryEventAllowed(runState, "西瓦的手镯");
     }
 
     /// <summary>

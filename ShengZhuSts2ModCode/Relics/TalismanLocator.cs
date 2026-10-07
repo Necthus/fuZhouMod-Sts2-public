@@ -417,7 +417,12 @@ public class TalismanLocator : ShengZhuSts2ModRelic, ITalismanRightClickable
             return false;
         }
 
-        int configuredActNumber = GetConfiguredStoryEventActNumber();
+        StoryEventReplacementConfig config = GetEffectiveStoryEventReplacementConfig();
+        if (!config.IsEnabled)
+        {
+            return false;
+        }
+        int configuredActNumber = config.ActNumber;
         int configuredActIndex = configuredActNumber - 1;
         if (runState.CurrentActIndex != configuredActIndex)
         {

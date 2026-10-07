@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Runs;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Helpers;
+using ShengZhuSts2Mod.ShengZhuSts2ModCode.Services;
 
 namespace ShengZhuSts2Mod.ShengZhuSts2ModCode.Events;
 
@@ -22,13 +23,13 @@ public class HistoryBookEvent : CustomEventModel
     public override string? CustomInitialPortraitPath => $"{MainFile.ResPath}/images/events/history_book_event.png";
 
     /// <summary>
-    /// 岁月史书全角色、全幕数可见。
+    /// 圣主跑团遵循选人事件勾选和幕数；其它角色保留原有自然出现条件。
     /// </summary>
     /// <param name="runState">当前跑团状态。</param>
-    /// <returns>始终返回 true。</returns>
+    /// <returns>当前跑团配置允许时返回 true。</returns>
     public override bool IsAllowed(IRunState runState)
     {
-        return true;
+        return StoryEventReplacementConfigService.IsStoryEventAllowed(runState, "岁月史书");
     }
 
     /// <summary>

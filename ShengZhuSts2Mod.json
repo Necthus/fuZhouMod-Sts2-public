@@ -3,7 +3,7 @@
   "name": "圣主历险记",
   "author": "黑白大彩电",
   "description": "“我是山之主，火之魂，远古的八大恶魔之首！” 曾经统治大地的恶魔首领圣主，如今在尖塔中苏醒。他失去了引以为傲的魔力，十二个符咒散落在塔的各处。为了找回昔日的荣光，他必须重新收集符咒，率领黑影兵团席卷塔尖...\n\n 该mod出现问题或觉得设计不好的地方都欢迎您的反馈，会尽快修复问题的，感谢各位捧场。\n\n QQ交流群： 598295851 \n\n \"I am the Lord of the Mountains, the Soul of Fire, the first of the Eight Ancient Demon Sorcerers!\"\n Shendu, the supreme Demon Sorcerer who once ruled the earth, now awakens within the Spire. Stripped of his proud magic, his immense power now lies divided among the Twelve Talismans scattered throughout the Spire. To reclaim his former glory, he must gather the Talismans once more and command the Shadowkhan to conquer the Spire...\n\n If you encounter any bugs or have any suggestions regarding the mechanics and design, please feel free to leave a comment! I will read your feedback and fix issues as quickly as possible. Thank you all for playing and supporting this mod!\n\n",
-  "version": "1.0.10-beta.1",
+  "version": "1.0.10-beta.2",
   "has_pck": true,
   "has_dll": true,
   "min_game_version": "0.111.0",
@@ -12,7 +12,7 @@
   "开局随机符咒说明": "圣主开局随机发放符咒配置。数量范围 0~12；0 表示关闭开局随机发放。黑名单里填写中文符咒名，被写入的符咒不会参与开局随机。实际发放上限会先扣掉有效黑名单，例如禁用6个符咒时最多只会从剩余6个里发放，即使数量写10也只会发最多6个。可选项：鼠符咒、牛符咒、虎符咒、兔符咒、龙符咒、蛇符咒、马符咒、羊符咒、猴符咒、鸡符咒、狗符咒、猪符咒。",
   "开局随机符咒数量": 0,
   "开局随机符咒黑名单": ["鼠符咒","虎符咒"],
-  "x层事件替换池说明": "指定楼层的首个问号事件会从下面数组随机替换。楼层填写 1~3 的数字；可选事件：远古封印、恶魔小龙、刀龙黑气、西瓦的手镯、岁月史书。想去掉哪个，直接从数组里删除那一项即可；留空数组表示关闭这个兜底替换。",
+  "x层事件替换池说明": "圣主跑团中，这五种剧情事件的自然出现和首个问号事件兜底都遵循本局选人配置。幕数填写1~3：勾选事件仅可在所选幕出现，未勾选不出现，空数组关闭这五种事件；所选幕首个问号事件从仍满足条件的勾选池中随机兜底一个。字段名保留旧版写法以兼容存档和配置。",
   "x层事件替换池楼层": 2,
   "x层事件替换池": ["远古封印", "恶魔小龙", "刀龙黑气", "西瓦的手镯"],
   "x层事件替换池backup": ["远古封印", "恶魔小龙", "刀龙黑气", "西瓦的手镯", "岁月史书"]

@@ -184,7 +184,7 @@ public static class StoryEventReplacementConfigPanelService
         }
 
         float closedLabelY = ResolveClosedLabelY(index);
-        _root.AddChild(CreateFixedLabel(GmUiText.Get("story_event_config.closed"), 12, new Rect2(new Vector2(8f, closedLabelY), new Vector2(150f, RowHeight))));
+        _root.AddChild(CreateFixedLabel(GmUiText.Get("story_event_config.closed"), 10, new Rect2(new Vector2(8f, closedLabelY), new Vector2(PanelBaseSize.X - 16f, RowHeight))));
 
         // 这块 UI 使用绝对坐标，不再交给 Container 布局，避免首次进入选人界面时被拉成长条。
         screen.GetTree().Root.AddChild(_root);

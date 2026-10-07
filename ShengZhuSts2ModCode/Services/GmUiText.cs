@@ -53,13 +53,13 @@ public static class GmUiText
         return key switch
         {
             "story_event_config.title" => "圣主事件池",
-            "story_event_config.act" => "楼层",
+            "story_event_config.act" => "幕数",
             "story_event_config.events" => "事件",
             "story_event_config.reset" => "重置",
-            "story_event_config.closed" => "不选事件=关闭",
-            "story_event_config.act1" => "1层",
-            "story_event_config.act2" => "2层",
-            "story_event_config.act3" => "3层",
+            "story_event_config.closed" => "仅所选幕；不勾选不出现",
+            "story_event_config.act1" => "第1幕",
+            "story_event_config.act2" => "第2幕",
+            "story_event_config.act3" => "第3幕",
             _ => key
         };
     }
@@ -77,7 +77,7 @@ public static class GmUiText
             "story_event_config.act" => "Act",
             "story_event_config.events" => "Events",
             "story_event_config.reset" => "Reset",
-            "story_event_config.closed" => "No events = off",
+            "story_event_config.closed" => "Selected act only; unchecked = off",
             "story_event_config.act1" => "Act 1",
             "story_event_config.act2" => "Act 2",
             "story_event_config.act3" => "Act 3",

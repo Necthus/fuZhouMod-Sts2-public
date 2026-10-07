@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Runs;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Character;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Helpers;
+using ShengZhuSts2Mod.ShengZhuSts2ModCode.Services;
 
 namespace ShengZhuSts2Mod.ShengZhuSts2ModCode.Events;
 
@@ -29,7 +30,8 @@ public class DaoLongEvent : CustomEventModel
     /// <returns>允许进入事件池时返回 true。</returns>
     public override bool IsAllowed(IRunState runState)
     {
-        return runState.Players.Any(player => player.Character is ShengZhu && DaoLongBlackQiHelper.HasEligibleCards(player));
+        return StoryEventReplacementConfigService.IsStoryEventAllowed(runState, "刀龙黑气")
+            && runState.Players.Any(player => player.Character is ShengZhu && DaoLongBlackQiHelper.HasEligibleCards(player));
     }
 
     /// <summary>

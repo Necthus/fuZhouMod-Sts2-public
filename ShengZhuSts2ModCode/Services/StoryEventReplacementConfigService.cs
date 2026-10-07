@@ -1,5 +1,6 @@
 using System.Text.Json;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Runs;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Character;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Models;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Relics;
@@ -171,6 +172,30 @@ public static class StoryEventReplacementConfigService
             ? []
             : eventNamesCsv.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
         return ValidateConfig(actNumber, names, fallbackWhenAllInvalid: false);
+    }
+
+    /// <summary>
+    /// 自然事件池和首个问号兜底共用选人规则：未勾选不出现，勾选仅在所选幕出现。
+    /// 没有圣主的跑团没有这块选人面板，保留事件原本的出现条件。
+    /// </summary>
+    public static bool IsStoryEventAllowed(IRunState runState, string eventName)
+    {
+        var shengZhuPlayers = runState.Players.Where(player => player.Character is ShengZhu).ToList();
+        if (shengZhuPlayers.Count == 0)
+        {
+            return true;
+        }
+
+        // 优先读取本局存档，不使用后续打开选人界面时可能变化的共享 UI 状态。
+        TalismanLocator? configuredLocator = shengZhuPlayers
+            .SelectMany(player => player.Relics.OfType<TalismanLocator>())
+            .FirstOrDefault(locator => locator.HasCustomStoryEventReplacementConfig);
+        StoryEventReplacementConfig config = configuredLocator != null
+            ? CreateFromSavedFields(configuredLocator.SavedStoryEventActNumber, configuredLocator.SavedStoryEventPoolNamesCsv)
+            : _pendingRunConfig ?? LoadDefaultConfigFromJson();
+
+        return runState.CurrentActIndex == config.ActNumber - 1
+            && config.EventNames.Contains(eventName);
     }
 
     /// <summary>

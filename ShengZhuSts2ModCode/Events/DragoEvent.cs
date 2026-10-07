@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Runs;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Character;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Helpers;
+using ShengZhuSts2Mod.ShengZhuSts2ModCode.Services;
 
 namespace ShengZhuSts2Mod.ShengZhuSts2ModCode.Events;
 
@@ -30,7 +31,8 @@ public class DragoEvent : CustomEventModel
     /// <returns>允许进入事件池时返回 true。</returns>
     public override bool IsAllowed(IRunState runState)
     {
-        return runState.Players.Any(player => player.Character is ShengZhu && !DragoEventHelper.HasCollaboration(player));
+        return StoryEventReplacementConfigService.IsStoryEventAllowed(runState, "恶魔小龙")
+            && runState.Players.Any(player => player.Character is ShengZhu && !DragoEventHelper.HasCollaboration(player));
     }
 
     /// <summary>

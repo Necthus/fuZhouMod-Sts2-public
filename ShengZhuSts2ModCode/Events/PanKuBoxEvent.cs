@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Runs;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Relics;
+using ShengZhuSts2Mod.ShengZhuSts2ModCode.Services;
 
 namespace ShengZhuSts2Mod.ShengZhuSts2ModCode.Events;
 
@@ -36,13 +37,14 @@ public class PanKuBoxEvent : CustomEventModel
     public override string? CustomInitialPortraitPath => $"{MainFile.ResPath}/images/events/panku_box.png";
 
     /// <summary>
-    /// 玩家未持有潘库宝盒时，事件可以随缘进入普通事件池；不做强制替换。
+    /// 遵循选人事件勾选和幕数，并要求至少一名玩家尚未持有潘库宝盒。
     /// </summary>
     /// <param name="runState">当前爬塔状态。</param>
     /// <returns>任意玩家未持有潘库宝盒时返回 true。</returns>
     public override bool IsAllowed(IRunState runState)
     {
-        return runState.Players.Any(player => player.Relics.All(relic => relic is not PanKuBox));
+        return StoryEventReplacementConfigService.IsStoryEventAllowed(runState, "远古封印")
+            && runState.Players.Any(player => player.Relics.All(relic => relic is not PanKuBox));
     }
 
     /// <summary>
