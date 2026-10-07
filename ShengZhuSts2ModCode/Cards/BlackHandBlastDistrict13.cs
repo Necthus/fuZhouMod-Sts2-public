@@ -34,7 +34,7 @@ public class BlackHandBlastDistrict13 : BlackHandGangCard
             return;
         }
 
-        await CreatureCmd.Damage(choiceContext, opponents, DynamicVars.Damage.BaseValue, ValueProp.Move, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, opponents, DynamicVars.Damage.BaseValue, ValueProp.Move, Owner.Creature, this, cardPlay);
 
         foreach (Creature creature in opponents.Where(creature => creature.IsAlive && !creature.IsDead))
         {
@@ -42,7 +42,7 @@ public class BlackHandBlastDistrict13 : BlackHandGangCard
             totalConsumed += consumed;
             if (consumed > 0)
             {
-                await CreatureCmd.Damage(choiceContext, creature, consumed * (int)DynamicVars["Magic"].BaseValue, ValueProp.Move, Owner.Creature, this);
+                await CreatureCmd.Damage(choiceContext, creature, consumed * (int)DynamicVars["Magic"].BaseValue, ValueProp.Move, Owner.Creature, this, cardPlay);
             }
         }
 

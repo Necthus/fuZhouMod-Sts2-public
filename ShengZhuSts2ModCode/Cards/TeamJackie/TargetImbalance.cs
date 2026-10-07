@@ -41,7 +41,7 @@ public class TargetImbalance : TeamJackieCard
             return;
         }
 
-        IReadOnlyList<DamageResult> results = (await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage.BaseValue, ValueProp.Move, Owner.Creature, this)).ToList();
+        IReadOnlyList<DamageResult> results = (await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage.BaseValue, ValueProp.Move, Owner.Creature, this, cardPlay)).ToList();
         DamageResult? result = results.FirstOrDefault();
         if (result == null || result.UnblockedDamage <= 0 || cardPlay.Target.IsDead || cardPlay.Target.Monster == null)
         {

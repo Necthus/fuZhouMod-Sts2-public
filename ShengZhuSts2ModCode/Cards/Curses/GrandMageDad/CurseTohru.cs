@@ -57,7 +57,7 @@ public class CurseTohru : GrandMageDadCurseCard
             return;
         }
 
-        await CreatureCmd.Damage(choiceContext, Owner.Creature, HpLoss, ValueProp.Unblockable | ValueProp.Unpowered, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, HpLoss, ValueProp.Unblockable | ValueProp.Unpowered, Owner.Creature, this, null);
         ShengZhuLogHelper.VerboseCombatInfo(() => $"【大法师老爹诅咒】【特鲁】回合结束触发：玩家={Owner.NetId}，本回合未打出攻击牌，失去生命={HpLoss}。");
     }
 }

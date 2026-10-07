@@ -41,6 +41,6 @@ public class ShadowDecreePower : ShengZhuSts2ModPower
         await PowerCmd.Apply<DexterityPower>(Owner, -1, Owner, null);
 
         // 失去1HP
-        await CreatureCmd.Damage(choiceContext, Owner, 1, ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(choiceContext, Owner, 1, ValueProp.Unpowered, Owner, null, null);
     }
 }

@@ -60,7 +60,7 @@ public class Gan : ShengZhuSts2ModCard
         }
 
         MainFile.Logger.Info($"【甘】暴击判定：当前暴击率={critChance}%，随机数={roll}，是否暴击={isCrit}，伤害={damage}");
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, damage, ValueProp.Move, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, damage, ValueProp.Move, Owner.Creature, this, cardPlay);
         await PowerCmd.Apply<GanPower>(Owner.Creature, 1, Owner.Creature, this);
     }
 

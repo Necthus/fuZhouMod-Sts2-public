@@ -205,7 +205,7 @@ public class TigerTalisman : ShengZhuSts2ModRelic
     /// <summary>
     /// 阴平衡（力量和敏捷取最大值的攻击侧）：若敏捷大于力量，攻击时将差值补足到伤害上。
     /// </summary>
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         // 只对自己造成的伤害生效
         if (dealer != Owner?.Creature || Owner?.Creature == null)

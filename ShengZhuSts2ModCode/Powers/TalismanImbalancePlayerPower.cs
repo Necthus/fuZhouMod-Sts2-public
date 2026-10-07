@@ -245,14 +245,14 @@ public class TalismanImbalancePlayerPower : ShengZhuSts2ModPower
         }
 
         RefreshDescriptionVars();
-        await CreatureCmd.Damage(choiceContext, Owner, HeavyTierDamageAfterCardPlayed, ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(choiceContext, Owner, HeavyTierDamageAfterCardPlayed, ValueProp.Unpowered, Owner, null, cardPlay);
         MainFile.Logger.Info($"【虎符咒失衡】重度惩罚：玩家={FormatOwner()}，卡牌={cardPlay.Card.Id.Entry}，卡牌结算后受到{HeavyTierDamageAfterCardPlayed}点可格挡伤害。");
     }
 
     /// <summary>
     /// 修正来自玩家自己卡牌的伤害；黑影兵团牌走专用入口，避免倍率重复。
     /// </summary>
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (!CanModifyCardDamage(cardSource, dealer))
         {

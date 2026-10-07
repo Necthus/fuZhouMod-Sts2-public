@@ -428,7 +428,7 @@ internal static class GrandMageDadMoveService
 
         for (int i = 0; i < hitCount; i++)
         {
-            await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), livingTargets, damage, ValueProp.Move, monster.Creature, null);
+            await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), livingTargets, damage, ValueProp.Move, monster.Creature, null, null);
         }
     }
 

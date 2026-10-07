@@ -39,6 +39,10 @@ public class EndlessDarkness : ShengZhuSts2ModCard
     /// </summary>
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        if (Owner?.Creature?.CombatState == null || !Owner.Creature.IsAlive)
+        {
+            return;
+        }
         MaskManager.BeginDeferredMaskOrbRefresh(Owner?.Creature);
         try
         {
@@ -47,7 +51,7 @@ public class EndlessDarkness : ShengZhuSts2ModCard
             MainFile.Logger.Info("【无尽黑暗】面具容量已最大化至10。");
 
             // 施加塔拉面具能力+1层
-            var taLaPower = await CommonActions.ApplySelf<TaLaPower>(choiceContext, this, 1);
+            var taLaPower = await PowerCmd.Apply<TaLaPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
             if (taLaPower != null)
             {
                 if (IsUpgraded)
@@ -71,10 +75,10 @@ public class EndlessDarkness : ShengZhuSts2ModCard
             await ApplyMaskPower<YiKaPower>(choiceContext);
 
             // 施加1层影噬
-            await CommonActions.ApplySelf<DominionPower>(choiceContext, this, 1);
+            await PowerCmd.Apply<DominionPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 
             // 施加无尽黑暗持续能力：回合开始时按消耗堆黑影兵团数量获得影噬
-            await CommonActions.ApplySelf<EndlessDarknessPower>(choiceContext, this, 1);
+            await PowerCmd.Apply<EndlessDarknessPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 
             MainFile.Logger.Info("【无尽黑暗】所有面具施加完成。");
         }
@@ -94,7 +98,7 @@ public class EndlessDarkness : ShengZhuSts2ModCard
         BaseMaskPower? power;
         try
         {
-            power = await CommonActions.ApplySelf<T>(choiceContext, this, 1);
+            power = await PowerCmd.Apply<T>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
         }
         finally
         {

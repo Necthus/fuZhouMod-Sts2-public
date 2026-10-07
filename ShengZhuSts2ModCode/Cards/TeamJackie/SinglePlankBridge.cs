@@ -59,7 +59,7 @@ public class SinglePlankBridge : TeamJackieCard
         CardModel topCard = state.DrawPile.Cards.First();
         for (int i = 0; i < playCount; i++)
         {
-            CardModel cardToPlay = i == playCount - 1 ? topCard : topCard.CreateDupe();
+            CardModel cardToPlay = i == playCount - 1 ? topCard : topCard.CreateDupe(Owner);
             if (i < playCount - 1)
             {
                 cardToPlay.ExhaustOnNextPlay = true;

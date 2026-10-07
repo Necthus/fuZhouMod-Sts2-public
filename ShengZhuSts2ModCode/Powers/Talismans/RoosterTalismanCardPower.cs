@@ -118,7 +118,7 @@ public class RoosterTalismanCardPower : ShengZhuSts2ModPower
     /// <summary>
     /// 修改受到的攻击伤害乘数：返回0.5使伤害减半。
     /// </summary>
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (Owner != null && target == Owner && props.IsPoweredAttack() && IsPrimaryFlightReductionSource())
         {

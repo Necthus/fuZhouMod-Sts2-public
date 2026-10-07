@@ -21,6 +21,6 @@ public class TaiShanPressPower : TurnDamageEchoPower
     protected override async Task DealEndTurnDamage(PlayerChoiceContext choiceContext, IReadOnlyList<Creature> opponents, int bonusDamage)
     {
         Creature randomTarget = opponents[StableRandomHelper.NextInt(Owner?.Player, opponents.Count)];
-        await CreatureCmd.Damage(choiceContext, randomTarget, bonusDamage, ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(choiceContext, randomTarget, bonusDamage, ValueProp.Unpowered, Owner, null, null);
     }
 }

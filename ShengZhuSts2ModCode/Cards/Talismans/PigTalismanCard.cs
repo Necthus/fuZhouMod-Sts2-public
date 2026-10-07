@@ -7,13 +7,15 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Relics;
+using ShengZhuSts2Mod.ShengZhuSts2ModCode.Helpers;
+using MegaCrit.Sts2.Core.Models;
 
 namespace ShengZhuSts2Mod.ShengZhuSts2ModCode.Cards.Talismans;
 
 /// <summary>
 /// 亥猪：2费稀有攻击牌。造成6(升级12)点伤害。移除目标白名单Buff并给予6(升级12)层易伤。消耗。
 /// </summary>
-public class PigTalismanCard : TalismanCard
+public class PigTalismanCard : TalismanCard, IActualEnemyTargetProvider
 {
     /// <summary>
     /// 构造卡牌数值：2费，攻击牌，稀有，消耗。6点伤害(升级+6)，6层易伤(升级+6)。
@@ -43,7 +45,7 @@ public class PigTalismanCard : TalismanCard
 
         if (HasTalismanRelic<PigTalisman>())
         {
-            await CreatureCmd.Damage(choiceContext, targets, DynamicVars.Damage.BaseValue, ValueProp.Move, Owner.Creature, this);
+            await CreatureCmd.Damage(choiceContext, targets, DynamicVars.Damage.BaseValue, ValueProp.Move, Owner.Creature, this, cardPlay);
             foreach (Creature target in targets)
             {
                 await ApplyPigDebuffEffects(choiceContext, target);
@@ -73,11 +75,17 @@ public class PigTalismanCard : TalismanCard
         return cardPlay.Target == null ? [] : [cardPlay.Target];
     }
 
+    public IReadOnlyList<Creature> GetActualEnemyTargets(CardPlay? cardPlay)
+    {
+        return cardPlay == null ? [] : GetTargets(cardPlay);
+    }
+
     /// <summary>
     /// 对指定目标执行亥猪的移除白名单Buff和易伤效果。
     /// </summary>
     private async Task ApplyPigDebuffEffects(PlayerChoiceContext choiceContext, Creature target)
     {
+        if (!target.IsAlive || target.IsDead) return;
         await RemoveWhitelistedBuffs(target);
 
         int vulnerableAmount = (int)DynamicVars["Magic"].BaseValue;

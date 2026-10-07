@@ -37,7 +37,7 @@ public class Flatten : TeamJackieCard
             return;
         }
 
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, CalculateDamage(this), ValueProp.Move, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, CalculateDamage(this), ValueProp.Move, Owner.Creature, this, cardPlay);
     }
 
     /// <summary>

@@ -48,7 +48,7 @@ public class Possession : ShengZhuSts2ModCard
         await StealPower<ArtifactPower>(target);
         await StealPower<RitualPower>(target);
         await StealPower<PlatingPower>(target);
-        await StealBlock(target, cardPlay);
+        await StealBlock(choiceContext, target, cardPlay);
 
         int debuffAmount = (int)DynamicVars["Debuff"].BaseValue;
         int mangleAmount = (int)DynamicVars["Mangle"].BaseValue;
@@ -83,7 +83,7 @@ public class Possession : ShengZhuSts2ModCard
     /// </summary>
     /// <param name="target">目标敌人。</param>
     /// <param name="cardPlay">本次出牌信息。</param>
-    private async Task StealBlock(Creature target, CardPlay cardPlay)
+    private async Task StealBlock(PlayerChoiceContext choiceContext, Creature target, CardPlay cardPlay)
     {
         if (Owner?.Creature == null)
         {
@@ -96,7 +96,7 @@ public class Possession : ShengZhuSts2ModCard
             return;
         }
 
-        await CreatureCmd.LoseBlock(target, blockAmount);
+        await CreatureCmd.LoseBlock(choiceContext, target, blockAmount, Owner.Creature);
         await CreatureCmd.GainBlock(Owner.Creature, blockAmount, default, cardPlay);
         MainFile.Logger.Info($"【夺舍】夺取目标护甲：{blockAmount}。");
     }

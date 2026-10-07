@@ -141,6 +141,7 @@ public abstract class BaseShadowKhanCard(int cost, CardType type, TargetType tar
             rawDamage,
             ValueProp.Move,
             this,
+            null,
             ModifyDamageHookType.All,
             CardPreviewMode.Normal,
             out _);
@@ -265,7 +266,7 @@ public abstract class BaseShadowKhanCard(int cost, CardType type, TargetType tar
         int imbalanceAdjustedDamage = TalismanImbalancePlayerPower.ModifyCardDamageForPlayer(Owner, this, finalDamage);
         int flutterAdjustedDamage = ApplyFlutterDamageReduction(target, imbalanceAdjustedDamage, creature);
         ShengZhuLogHelper.VerboseCombatInfo(() => $"【黑影兵团攻击】卡牌={Id.Entry}，卡面基础伤害={PrintedBaseDamage}，影噬={GetDominionAmount()}，基础结算伤害={damage}，牛符咒后={finalDamage}，虎符咒失衡后={imbalanceAdjustedDamage}，最终伤害={flutterAdjustedDamage}");
-        var damageResults = (await CreatureCmd.Damage(choiceContext, target, flutterAdjustedDamage, ValueProp.Move | ValueProp.Unpowered, creature, this)).ToList();
+        var damageResults = (await CreatureCmd.Damage(choiceContext, target, flutterAdjustedDamage, ValueProp.Move | ValueProp.Unpowered, creature, this, null)).ToList();
         await ResolveFlutterAfterShadowKhanAttack(choiceContext, target, damageResults, creature);
         if (targetHadBlackHand && !BlackHandCardHelper.IsLivingCreature(target))
         {
@@ -330,7 +331,7 @@ public abstract class BaseShadowKhanCard(int cost, CardType type, TargetType tar
         {
             List<Creature> groupTargets = damageGroup.Select(state => state.Target).ToList();
             ShengZhuLogHelper.VerboseCombatInfo(() => $"【黑影兵团群体攻击】卡牌={Id.Entry}，目标数={groupTargets.Count}，目标=[{string.Join(",", groupTargets.Select(target => target.Name))}]，卡面基础伤害={PrintedBaseDamage}，影噬={GetDominionAmount()}，基础结算伤害={damage}，牛符咒后={finalDamage}，虎符咒失衡后={imbalanceAdjustedDamage}，最终伤害={damageGroup.Key}");
-            IReadOnlyList<DamageResult> damageResults = (await CreatureCmd.Damage(choiceContext, groupTargets, damageGroup.Key, ValueProp.Move | ValueProp.Unpowered, creature, this)).ToList();
+            IReadOnlyList<DamageResult> damageResults = (await CreatureCmd.Damage(choiceContext, groupTargets, damageGroup.Key, ValueProp.Move | ValueProp.Unpowered, creature, this, null)).ToList();
             foreach (var state in damageGroup)
             {
                 await ResolveFlutterAfterShadowKhanAttack(choiceContext, state.Target, damageResults, creature);
@@ -359,7 +360,7 @@ public abstract class BaseShadowKhanCard(int cost, CardType type, TargetType tar
         var creature = Owner?.Creature;
         bool targetHadBlackHand = target.HasPower<BlackHandPower>();
         ShengZhuLogHelper.VerboseCombatInfo(() => $"【黑影兵团攻击】恶魔法典生效：卡牌={Id.Entry}，卡面基础伤害={PrintedBaseDamage}，影噬={GetDominionAmount()}，进入常规修正前伤害={damage}。");
-        await CreatureCmd.Damage(choiceContext, target, damage, ValueProp.Move, creature, this);
+        await CreatureCmd.Damage(choiceContext, target, damage, ValueProp.Move, creature, this, null);
         if (targetHadBlackHand && !BlackHandCardHelper.IsLivingCreature(target))
         {
             await BountyPower.ResolveRewardForTarget(choiceContext, Owner, target, true);
@@ -386,7 +387,7 @@ public abstract class BaseShadowKhanCard(int cost, CardType type, TargetType tar
             .ToList();
 
         ShengZhuLogHelper.VerboseCombatInfo(() => $"【黑影兵团群体攻击】恶魔法典生效：卡牌={Id.Entry}，目标数={targets.Count}，目标=[{string.Join(",", targets.Select(target => target.Name))}]，卡面基础伤害={PrintedBaseDamage}，影噬={GetDominionAmount()}，进入常规修正前伤害={damage}。");
-        await CreatureCmd.Damage(choiceContext, targets, damage, ValueProp.Move, creature, this);
+        await CreatureCmd.Damage(choiceContext, targets, damage, ValueProp.Move, creature, this, null);
 
         foreach (var state in targetStates)
         {
@@ -431,7 +432,7 @@ public abstract class BaseShadowKhanCard(int cost, CardType type, TargetType tar
             return damage;
         }
 
-        decimal multiplier = flutterPower.ModifyDamageMultiplicative(target, damage, ValueProp.Move, dealer, this);
+        decimal multiplier = flutterPower.ModifyDamageMultiplicative(target, damage, ValueProp.Move, dealer, this, null);
         int reducedDamage = Math.Max(0, (int)Math.Floor(damage * multiplier));
         ShengZhuLogHelper.VerboseCombatInfo(() => $"【黑影兵团攻击】触发振翅减伤：卡牌={Id.Entry}，目标={target.Name}，减伤前={damage}，倍率={multiplier}，减伤后={reducedDamage}。");
         return reducedDamage;

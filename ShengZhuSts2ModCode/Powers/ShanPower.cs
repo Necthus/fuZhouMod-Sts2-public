@@ -23,7 +23,7 @@ public class ShanPower : TurnDamageEchoPower
         {
             if (opponent.IsAlive && !opponent.IsDead)
             {
-                await CreatureCmd.Damage(choiceContext, opponent, bonusDamage, ValueProp.Unpowered, Owner, null);
+                await CreatureCmd.Damage(choiceContext, opponent, bonusDamage, ValueProp.Unpowered, Owner, null, null);
             }
         }
     }

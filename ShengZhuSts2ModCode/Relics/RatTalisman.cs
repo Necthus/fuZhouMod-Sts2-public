@@ -400,7 +400,12 @@ public class RatTalisman : ShengZhuSts2ModRelic, ITalismanRightClickable, ITalis
     /// <returns>异步任务。</returns>
     private async Task ReplaceCardWithRandomAttack(PlayerChoiceContext choiceContext, CardModel targetCard, string triggerSource)
     {
-        await CardCmd.Exhaust(choiceContext, targetCard);
+        var combatId = CombatManager.Instance.CurrentCombatId;
+        var result = await CardCmd.Exhaust(choiceContext, targetCard);
+        if (result == null || !CombatManager.Instance.IsCurrentLiveCombat(combatId))
+        {
+            return;
+        }
 
         _cooldownTurnsRemaining = CooldownTurns;
         UpdateTalismanVisualState(false, _cooldownTurnsRemaining);

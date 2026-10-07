@@ -131,7 +131,7 @@ public class PetrifiedPower : ShengZhuSts2ModPower
     /// <summary>
     /// 按石化层数提高目标受到的攻击伤害。
     /// </summary>
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (Owner == null || target != Owner || !props.IsPoweredAttack())
         {

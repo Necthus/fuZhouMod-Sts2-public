@@ -130,7 +130,7 @@ public class BlackHandNoNameYetPower : ShengZhuSts2ModPower, IBlackHandAppliedLi
         {
             int totalDamage = CalculateTotalTriggerDamage(triggerCount);
             int cardsToDraw = CalculateTotalDrawCount(triggerCount);
-            await CreatureCmd.Damage(choiceContext, target, totalDamage, ValueProp.Unpowered, Owner, null);
+            await CreatureCmd.Damage(choiceContext, target, totalDamage, ValueProp.Unpowered, Owner, null, null);
             if (cardsToDraw > 0)
             {
                 await CardPileCmd.Draw(choiceContext, cardsToDraw, Owner.Player);

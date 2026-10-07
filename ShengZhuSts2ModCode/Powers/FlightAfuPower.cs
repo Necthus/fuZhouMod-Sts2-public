@@ -1,4 +1,5 @@
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
@@ -35,7 +36,7 @@ public class FlightAfuPower : ShengZhuSts2ModPower
     /// <summary>
     /// 修改受到的伤害乘数：返回0.5使伤害减半。
     /// </summary>
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         // 只对自己受到的攻击伤害生效，返回0.5使伤害减半
         if (Owner != null && target == Owner && IsPrimaryFlightReductionSource())

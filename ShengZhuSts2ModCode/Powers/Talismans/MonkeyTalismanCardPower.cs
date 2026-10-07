@@ -35,7 +35,7 @@ public class MonkeyTalismanCardPower : ShengZhuSts2ModPower
     /// <summary>
     /// 修改受到的伤害乘数：增加25%或50%。
     /// </summary>
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (Owner != null && target == Owner && props.IsPoweredAttack())
         {
@@ -84,7 +84,7 @@ public class MonkeyTalismanCardPower : ShengZhuSts2ModPower
         }
 
         Flash();
-        await CreatureCmd.Damage(choiceContext, dealer, reflectDamage, ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(choiceContext, dealer, reflectDamage, ValueProp.Unpowered, Owner, null, null);
         MainFile.Logger.Info($"【申猴】按敌方攻击输出反弹伤害{reflectDamage}给攻击者。");
     }
 

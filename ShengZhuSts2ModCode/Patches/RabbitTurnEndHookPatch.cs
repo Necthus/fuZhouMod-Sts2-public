@@ -27,46 +27,46 @@ public static class RabbitTurnEndHookPatch
     /// <summary>
     /// 拦截玩家侧回合结束前模型钩子。
     /// </summary>
-    [HarmonyPatch(typeof(Hook), nameof(Hook.BeforeTurnEnd))]
-    public static class BeforeTurnEndPatch
+    [HarmonyPatch(typeof(Hook), nameof(Hook.BeforeSideTurnEnd))]
+    public static class BeforeSideTurnEndPatch
     {
         /// <summary>
-        /// 若当前是卯兔伪结束回合，则只临时停用卯兔玩家自己的 BeforeTurnEnd 模型钩子。
+        /// 若当前是卯兔伪结束回合，则只临时停用卯兔玩家自己的 BeforeSideTurnEnd 模型钩子。
         /// </summary>
         private static void Prefix(ICombatState combatState, CombatSide side, IEnumerable<Creature> participants, out RabbitHookSuppressionState __state)
         {
-            __state = BeginSuppressingPlayerHooks(combatState, side, "BeforeTurnEnd");
+            __state = BeginSuppressingPlayerHooks(combatState, side, "BeforeSideTurnEnd");
         }
 
         /// <summary>
-        /// 原版 BeforeTurnEnd 模型钩子执行结束后恢复卯兔玩家自己的 Hook。
+        /// 原版 BeforeSideTurnEnd 模型钩子执行结束后恢复卯兔玩家自己的 Hook。
         /// </summary>
         private static void Postfix(ref Task __result, RabbitHookSuppressionState __state)
         {
-            __result = RestorePlayerHooksAfter(__result, __state, "BeforeTurnEnd");
+            __result = RestorePlayerHooksAfter(__result, __state, "BeforeSideTurnEnd");
         }
     }
 
     /// <summary>
     /// 拦截玩家侧回合结束后模型钩子。
     /// </summary>
-    [HarmonyPatch(typeof(Hook), nameof(Hook.AfterTurnEnd))]
-    public static class AfterTurnEndPatch
+    [HarmonyPatch(typeof(Hook), nameof(Hook.AfterSideTurnEnd))]
+    public static class AfterSideTurnEndPatch
     {
         /// <summary>
-        /// 若当前是卯兔伪结束回合，则只临时停用卯兔玩家自己的 AfterTurnEnd 模型钩子。
+        /// 若当前是卯兔伪结束回合，则只临时停用卯兔玩家自己的 AfterSideTurnEnd 模型钩子。
         /// </summary>
         private static void Prefix(ICombatState combatState, CombatSide side, IEnumerable<Creature> participants, out RabbitHookSuppressionState __state)
         {
-            __state = BeginSuppressingPlayerHooks(combatState, side, "AfterTurnEnd");
+            __state = BeginSuppressingPlayerHooks(combatState, side, "AfterSideTurnEnd");
         }
 
         /// <summary>
-        /// 原版 AfterTurnEnd 模型钩子执行结束后恢复卯兔玩家自己的 Hook。
+        /// 原版 AfterSideTurnEnd 模型钩子执行结束后恢复卯兔玩家自己的 Hook。
         /// </summary>
         private static void Postfix(ref Task __result, RabbitHookSuppressionState __state, ICombatState combatState, CombatSide side, IEnumerable<Creature> participants)
         {
-            __result = RestorePlayerHooksAndClearContextAfter(__result, __state, "AfterTurnEnd", combatState, side);
+            __result = RestorePlayerHooksAndClearContextAfter(__result, __state, "AfterSideTurnEnd", combatState, side);
         }
     }
 
@@ -133,7 +133,7 @@ public static class RabbitTurnEndHookPatch
     }
 
     /// <summary>
-    /// 等待玩家侧 AfterTurnEnd 完成后恢复 Hook，并清理卯兔伪结束上下文。
+    /// 等待玩家侧 AfterSideTurnEnd 完成后恢复 Hook，并清理卯兔伪结束上下文。
     /// </summary>
     /// <param name="originalTask">原版 Hook 返回的任务。</param>
     /// <param name="state">本次停用记录。</param>
@@ -151,7 +151,7 @@ public static class RabbitTurnEndHookPatch
         {
             if (side == CombatSide.Player)
             {
-                RabbitTurnSkipContext.ForceClear(combatState, "玩家侧 AfterTurnEnd 完成");
+                RabbitTurnSkipContext.ForceClear(combatState, "玩家侧 AfterSideTurnEnd 完成");
             }
         }
     }

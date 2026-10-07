@@ -10,3 +10,8 @@ packages/
 .editorconfig
 *.user
 Directory.Build.props
+**/bin/
+**/obj/
+dist/
+backups/
+build-*.log

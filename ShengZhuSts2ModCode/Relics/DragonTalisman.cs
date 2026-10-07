@@ -83,7 +83,7 @@ public class DragonTalisman : ShengZhuSts2ModRelic
 
             foreach (Creature enemy in opponents)
             {
-                await CreatureCmd.Damage(choiceContext, enemy, baseDamage, ValueProp.Unpowered, Owner?.Creature, null);
+                await CreatureCmd.Damage(choiceContext, enemy, baseDamage, ValueProp.Unpowered, Owner?.Creature, null, cardPlay);
             }
         }
     }

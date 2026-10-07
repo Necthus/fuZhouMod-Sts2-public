@@ -37,13 +37,13 @@ public class DragonTalismanCard : TalismanCard
             return;
         }
 
-        await ExecuteDragonAttack(choiceContext, 0);
+        await ExecuteDragonAttack(choiceContext, cardPlay, 0);
     }
 
     /// <summary>
     /// 执行龙符咒攻击逻辑：对所有敌人造成伤害，若击杀则递归触发。
     /// </summary>
-    private async Task ExecuteDragonAttack(PlayerChoiceContext choiceContext, int chainDepth)
+    private async Task ExecuteDragonAttack(PlayerChoiceContext choiceContext, CardPlay cardPlay, int chainDepth)
     {
         var combatState = Owner!.Creature!.CombatState;
         if (combatState == null)
@@ -72,7 +72,7 @@ public class DragonTalismanCard : TalismanCard
 
         // 用攻击命令执行卡牌伤害，保证伤害预览、力量修正和联机同步走同一套流程。
         var attack = await DamageCmd.Attack((CalculatedDamageVar)DynamicVars["Damage"])
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(combatState)
             .Execute(choiceContext);
         bool killedAny = attack.Results.SelectMany(results => results).Any(result => result.Receiver.IsDead || !result.Receiver.IsAlive);
@@ -85,7 +85,7 @@ public class DragonTalismanCard : TalismanCard
         if (killedAny && aliveCountAfter > 0)
         {
             MainFile.Logger.Info($"【辰龙】击杀触发连锁！当前仍有{aliveCountAfter}个敌人存活，再次触发。");
-            await ExecuteDragonAttack(choiceContext, chainDepth + 1);
+            await ExecuteDragonAttack(choiceContext, cardPlay, chainDepth + 1);
         }
     }
 

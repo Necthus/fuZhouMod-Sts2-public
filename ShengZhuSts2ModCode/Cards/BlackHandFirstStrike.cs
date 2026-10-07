@@ -33,7 +33,7 @@ public class BlackHandFirstStrike : BlackHandGangCard
             await ApplyBlackHand(choiceContext, cardPlay.Target, (int)DynamicVars["ApplyAmount"].BaseValue);
         }
 
-        await CommonActions.CardAttack(this, cardPlay.Target, damage).Execute(choiceContext);
+        await CommonActions.CardAttack(this, cardPlay, cardPlay.Target, damage, MegaCrit.Sts2.Core.ValueProps.ValueProp.Move).Execute(choiceContext);
         await ResolveBountyRewards(choiceContext);
     }
 }

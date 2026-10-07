@@ -50,7 +50,7 @@ public class TigerTalismanYang : TeamJackieCard
         }
 
         decimal damage = ((CalculatedVar)DynamicVars["CalculatedDamage"]).Calculate(cardPlay.Target);
-        await CommonActions.CardAttack(this, cardPlay.Target, damage).Execute(choiceContext);
+        await CommonActions.CardAttack(this, cardPlay, cardPlay.Target, damage, MegaCrit.Sts2.Core.ValueProps.ValueProp.Move).Execute(choiceContext);
     }
 
     /// <summary>

@@ -672,7 +672,7 @@ public static class PanKuDemonQiHelper
         int damage = CalculateDemonQiPercentDamage(target, source, cardSource, divisor, minDamage, maxDamage, out int rawDamage, out int playerCount, out int scaledMaxDamage, out bool ignoreDamageCap);
 
         MainFile.Logger.Info($"【恶魔异常伤害】目标={target.Name}，原始伤害={rawDamage}，最低={minDamage}，单人上限={maxDamage}，玩家数={playerCount}，额外玩家系数={AdditionalPlayerDamageCapRatio:0.##}，多人上限={scaledMaxDamage}，队伍解除上限={ignoreDamageCap}，最终伤害={damage}。");
-        await CreatureCmd.Damage(choiceContext, target, damage, MegaCrit.Sts2.Core.ValueProps.ValueProp.Unblockable | MegaCrit.Sts2.Core.ValueProps.ValueProp.Unpowered, source, cardSource);
+        await CreatureCmd.Damage(choiceContext, target, damage, MegaCrit.Sts2.Core.ValueProps.ValueProp.Unblockable | MegaCrit.Sts2.Core.ValueProps.ValueProp.Unpowered, source, cardSource, null);
     }
 
     /// <summary>

@@ -43,7 +43,7 @@ public class BlackHandBitterChoice : BlackHandGangCard
         int resourceAmount = (int)DynamicVars["Magic"].BaseValue;
         int statsAmount = (int)DynamicVars["Stats"].BaseValue;
         int hpLoss = (int)DynamicVars["HpLoss"].BaseValue;
-        await CreatureCmd.Damage(choiceContext, Owner.Creature, hpLoss, ValueProp.Unblockable | ValueProp.Unpowered, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, hpLoss, ValueProp.Unblockable | ValueProp.Unpowered, Owner.Creature, this, cardPlay);
         if (!Owner.Creature.IsAlive || Owner.Creature.IsDead)
         {
             MainFile.Logger.Info($"【苦涩的抉择】支付生命代价后玩家死亡，停止后续效果：失去生命={hpLoss}。");

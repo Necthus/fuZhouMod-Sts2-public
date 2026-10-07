@@ -85,7 +85,7 @@ public class TigerTalismanAttackCard : TalismanCard
             int bonusDamage = (int)CalculateBonusDamage(this, target);
             decimal totalDamage = baseDamage + bonusDamage;
 
-            await CreatureCmd.Damage(choiceContext, target, totalDamage, ValueProp.Move, player, this);
+            await CreatureCmd.Damage(choiceContext, target, totalDamage, ValueProp.Move, player, this, cardPlay);
             MainFile.Logger.Info($"【寅虎·攻】敌方HP%({targetHpPercent:P0})<=玩家HP%({playerHpPercent:P0})，额外伤害{bonusDamage}(已损失HP{missingHp}×{damageRatio:P0})。");
         }
     }

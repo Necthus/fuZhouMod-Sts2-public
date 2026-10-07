@@ -11,6 +11,8 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Networking;
+using ShengZhuSts2Mod.ShengZhuSts2ModCode.Helpers;
+using System.Runtime.CompilerServices;
 
 namespace ShengZhuSts2Mod.ShengZhuSts2ModCode.Relics;
 
@@ -20,6 +22,15 @@ namespace ShengZhuSts2Mod.ShengZhuSts2ModCode.Relics;
 /// </summary>
 public class PigTalisman : ShengZhuSts2ModRelic, ITalismanRightClickable, ITalismanCooldownResettable, ITalismanInteractionState
 {
+    // CardPlay distinguishes replays and nested auto-plays of the same card.
+    private ConditionalWeakTable<CardPlay, List<Creature>> _splashTargets = new();
+
+    protected override void DeepCloneFields()
+    {
+        base.DeepCloneFields();
+        _splashTargets = new();
+    }
+
     /// <summary>
     /// 是否已激发。
     /// </summary>
@@ -85,6 +96,7 @@ public class PigTalisman : ShengZhuSts2ModRelic, ITalismanRightClickable, ITalis
     /// </summary>
     public override Task BeforeCombatStart()
     {
+        _splashTargets.Clear();
         _activated = false;
         _cooldownTurnsRemaining = 0;
         UpdateTalismanVisualState(_activated, _cooldownTurnsRemaining);
@@ -109,6 +121,7 @@ public class PigTalisman : ShengZhuSts2ModRelic, ITalismanRightClickable, ITalis
     /// </summary>
     public override async Task BeforeCardPlayed(CardPlay cardPlay)
     {
+        CaptureSplashTargets(cardPlay);
         if (!_activated || cardPlay?.Card == null || Owner?.Creature == null || !IsCardPlayedByOwner(cardPlay))
         {
             return;
@@ -147,6 +160,10 @@ public class PigTalisman : ShengZhuSts2ModRelic, ITalismanRightClickable, ITalis
     /// </summary>
     private IEnumerable<Creature> GetTargets(CardPlay cardPlay)
     {
+        if (cardPlay.Card is IActualEnemyTargetProvider provider)
+        {
+            return provider.GetActualEnemyTargets(cardPlay);
+        }
         // 如果是全体攻击，返回所有可攻击敌人
         if (cardPlay.Card.TargetType == TargetType.AllEnemies)
         {
@@ -171,17 +188,10 @@ public class PigTalisman : ShengZhuSts2ModRelic, ITalismanRightClickable, ITalis
     {
         bool removed = false;
 
-        // 移除格挡：对目标造成等于其Block值的无属性伤害来清除
+        // Direct block removal avoids triggering damage hooks or hurting the target.
         if (target.Block > 0)
         {
-            decimal blockAmount = target.Block;
-            await CreatureCmd.Damage(
-                new ThrowingPlayerChoiceContext(),
-                target,
-                blockAmount,
-                ValueProp.Unpowered,
-                Owner!.Creature,
-                null);
+            await CreatureCmd.LoseBlock(new ThrowingPlayerChoiceContext(), target, target.Block, Owner!.Creature);
             removed = true;
         }
 
@@ -203,6 +213,12 @@ public class PigTalisman : ShengZhuSts2ModRelic, ITalismanRightClickable, ITalis
     /// </summary>
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        if (!_splashTargets.TryGetValue(cardPlay, out List<Creature>? adjacentTargets))
+        {
+            return;
+        }
+        _splashTargets.Remove(cardPlay);
+
         if (!HasRatResonance() || cardPlay?.Card == null || Owner?.Creature == null || !IsCardPlayedByOwner(cardPlay))
         {
             return;
@@ -214,51 +230,54 @@ public class PigTalisman : ShengZhuSts2ModRelic, ITalismanRightClickable, ITalis
             return;
         }
 
-        // 获取所有存活敌人列表
-        var combatState = Owner.Creature.CombatState;
-        if (combatState == null)
-        {
-            return;
-        }
-
-        var allEnemies = combatState.HittableEnemies?.ToList();
-        if (allEnemies == null || allEnemies.Count <= 1)
-        {
-            return;
-        }
-
-        // 找到目标在列表中的索引
-        int targetIndex = allEnemies.IndexOf(cardPlay.Target);
-        if (targetIndex < 0)
-        {
-            return;
-        }
-
         // 计算溅射伤害（卡牌伤害的15%，最少1点）
         decimal cardDamage = cardPlay.Card.DynamicVars.ContainsKey("Damage")
             ? cardPlay.Card.DynamicVars["Damage"].BaseValue
             : 0;
         int splashDamage = Math.Max(1, (int)(cardDamage * 0.15m));
 
-        // 对相邻敌人造成溅射伤害
-        List<Creature> adjacentTargets = [];
-        if (targetIndex > 0 && !allEnemies[targetIndex - 1].IsDead)
-        {
-            adjacentTargets.Add(allEnemies[targetIndex - 1]);
-        }
-        if (targetIndex < allEnemies.Count - 1 && !allEnemies[targetIndex + 1].IsDead)
-        {
-            adjacentTargets.Add(allEnemies[targetIndex + 1]);
-        }
-
         if (adjacentTargets.Count > 0)
         {
             Flash();
             foreach (Creature adjacent in adjacentTargets)
             {
-                await CreatureCmd.Damage(choiceContext, adjacent, splashDamage, ValueProp.Unpowered, Owner.Creature, cardPlay.Card);
+                if (!adjacent.IsAlive || adjacent.IsDead || adjacent.CombatState != Owner.Creature.CombatState)
+                {
+                    continue;
+                }
+                await CreatureCmd.Damage(choiceContext, adjacent, splashDamage, ValueProp.Unpowered, Owner.Creature, cardPlay.Card, cardPlay);
             }
         }
+    }
+
+    private void CaptureSplashTargets(CardPlay cardPlay)
+    {
+        if (!HasRatResonance() || !IsCardPlayedByOwner(cardPlay)
+            || cardPlay.Card.Type != CardType.Attack || cardPlay.Target == null
+            || cardPlay.Card.TargetType != TargetType.AnyEnemy
+            || Owner?.Creature?.CombatState == null)
+        {
+            return;
+        }
+
+        // Cards that become area attacks through resonance must not also splash.
+        if (cardPlay.Card is IActualEnemyTargetProvider provider
+            && provider.GetActualEnemyTargets(cardPlay).Count != 1)
+        {
+            return;
+        }
+
+        List<Creature> enemies = Owner.Creature.CombatState.HittableEnemies.ToList();
+        int index = enemies.IndexOf(cardPlay.Target);
+        if (index < 0)
+        {
+            return;
+        }
+
+        List<Creature> adjacent = [];
+        if (index > 0) adjacent.Add(enemies[index - 1]);
+        if (index + 1 < enemies.Count) adjacent.Add(enemies[index + 1]);
+        _splashTargets.AddOrUpdate(cardPlay, adjacent);
     }
 
     /// <summary>

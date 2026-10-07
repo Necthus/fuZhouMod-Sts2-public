@@ -120,7 +120,7 @@ public class BountyPower : ShengZhuSts2ModPower, IBlackHandAppliedListener
         }
 
         _trackedTargets.Add(target);
-        await CreatureCmd.Damage(choiceContext, target, Amount, ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(choiceContext, target, Amount, ValueProp.Unpowered, Owner, null, null);
         await ResolvePendingRewards(choiceContext);
     }
 

@@ -30,6 +30,6 @@ public class Suplex : TeamJackieCard
         }
 
         decimal damage = DynamicVars.Damage.BaseValue + cardPlay.Target.MaxHp / 8;
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, damage, ValueProp.Move, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, damage, ValueProp.Move, Owner.Creature, this, cardPlay);
     }
 }

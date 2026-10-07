@@ -40,7 +40,7 @@
 
     <ItemGroup>
         <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="All" />
-        <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="*" />
+        <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.2.1" />
         <!-- Generates a .pck file when building if only using simple assets. May not work on all setups. Uncomment to test. -->
         <!-- <PackageReference Include="BSchneppe.StS2.PckPacker" Version="0.1.1" PrivateAssets="All" /> -->
         <AdditionalFiles Include="ShengZhuSts2Mod/localization/**/*.json" /> <!-- Used by analyzer -->
@@ -56,6 +56,8 @@
         <Compile Remove="ModTemplate-StS2.wiki/**" />
         <Compile Remove="my_doc/**" />
         <Compile Remove="tmp_decomp/**" />
+        <Compile Remove="tools/**" />
+        <Compile Remove="dist/**" />
         <EmbeddedResource Remove="ShengZhuSts2Mod/**" />
         <EmbeddedResource Remove="materials/**" />
         <EmbeddedResource Remove="shaders/**" />
@@ -78,7 +80,7 @@
     
     <Target Name="CheckDependencyPaths">
         <Error Text=" Slay the Spire 2 data not found at path '$(Sts2DataDir)'" Condition="'$(Sts2DataDir)' == '' or !Exists('$(Sts2DataDir)')" />
-        <Error Text=" BaseLib 3.3.0 workshop dll not found at path '$(BaseLibWorkshopDll)'" Condition="'$(BaseLibWorkshopDll)' == '' or !Exists('$(BaseLibWorkshopDll)')" />
+        <Error Text=" BaseLib workshop dll not found at path '$(BaseLibWorkshopDll)' (tested with 3.4.7)" Condition="'$(BaseLibWorkshopDll)' == '' or !Exists('$(BaseLibWorkshopDll)')" />
     </Target>
     
     <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">

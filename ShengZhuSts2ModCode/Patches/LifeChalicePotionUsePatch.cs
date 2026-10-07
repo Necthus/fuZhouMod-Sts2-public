@@ -167,12 +167,13 @@ public static class LifeChalicePotionUsePatch
         ReplayDepth.Value++;
         bool pushedModel = false;
         bool beganEffect = false;
+        CombatId? effectCombatId = null;
 
         try
         {
             state.ChoiceContext.PushModel(state.Potion);
             pushedModel = true;
-            CombatManager.Instance.BeginCardOrPotionEffect(state.Owner);
+            effectCombatId = CombatManager.Instance.BeginCardOrPotionEffect(state.Owner);
             beganEffect = true;
             Task? replayTask = onUseMethod.Invoke(state.Potion, [state.ChoiceContext, state.Target]) as Task;
             if (replayTask == null)
@@ -192,7 +193,7 @@ public static class LifeChalicePotionUsePatch
         {
             if (beganEffect)
             {
-                CombatManager.Instance.EndCardOrPotionEffect(state.Owner);
+                await CombatManager.Instance.EndCardOrPotionEffect(effectCombatId, state.Owner);
             }
 
             if (pushedModel)
@@ -203,7 +204,7 @@ public static class LifeChalicePotionUsePatch
             ReplayDepth.Value = Math.Max(0, ReplayDepth.Value - 1);
         }
 
-        await CombatManager.Instance.CheckForEmptyHand(state.ChoiceContext, state.Owner);
+        await CombatManager.Instance.CheckForEmptyHand(effectCombatId, state.ChoiceContext, state.Owner);
         MainFile.Logger.Info($"【生命之杯】药水重放完成：玩家={state.Owner.NetId}，药水={FormatPotion(state.Potion)}，目标={FormatTarget(state.Target)}。");
         return true;
     }

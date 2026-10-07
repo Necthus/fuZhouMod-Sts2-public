@@ -56,7 +56,7 @@ public class AfuBeatJackie : AhFuCard
         }
 
         decimal damage = ((CalculatedVar)DynamicVars["Damage"]).Calculate(cardPlay.Target);
-        await CommonActions.CardAttack(this, cardPlay.Target, damage).Execute(choiceContext);
+        await CommonActions.CardAttack(this, cardPlay, cardPlay.Target, damage, MegaCrit.Sts2.Core.ValueProps.ValueProp.Move).Execute(choiceContext);
 
         await ResolveBountyRewards(choiceContext);
     }

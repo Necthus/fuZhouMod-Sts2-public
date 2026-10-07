@@ -50,7 +50,7 @@ public class DrunkenFist : TeamJackieCard
             }
 
             int damage = StableRandomHelper.NextIntInclusive(Owner, minDamage, maxDamage);
-            await CreatureCmd.Damage(choiceContext, enemies, damage, ValueProp.Move, Owner.Creature, this);
+            await CreatureCmd.Damage(choiceContext, enemies, damage, ValueProp.Move, Owner.Creature, this, cardPlay);
         }
     }
 }

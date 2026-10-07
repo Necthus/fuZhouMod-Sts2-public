@@ -48,7 +48,7 @@ public static class ShivaBraceletEventHelper
             AhFuHealthLoss,
             ValueProp.Unblockable | ValueProp.Unpowered,
             player.Creature,
-            null);
+            null, null);
 
         await GiveShivaBracelet(player);
         MainFile.Logger.Info($"【西瓦手镯事件】协助阿福完成：玩家={player.NetId}，失去生命={AhFuHealthLoss}，获得西瓦手镯。");

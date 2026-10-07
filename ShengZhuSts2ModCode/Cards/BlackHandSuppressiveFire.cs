@@ -28,14 +28,14 @@ public class BlackHandSuppressiveFire : BlackHandGangCard
         IReadOnlyList<Creature> opponents = GetLivingOpponents();
         decimal damage = DynamicVars.Damage.BaseValue;
 
-        await CreatureCmd.Damage(choiceContext, opponents, damage, ValueProp.Move, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, opponents, damage, ValueProp.Move, Owner.Creature, this, cardPlay);
 
         foreach (Creature creature in opponents)
         {
             int extraDamage = BlackHandPower.GetAmount(creature) / 2;
             if (extraDamage > 0)
             {
-                await CreatureCmd.Damage(choiceContext, creature, extraDamage, ValueProp.Move, Owner.Creature, this);
+                await CreatureCmd.Damage(choiceContext, creature, extraDamage, ValueProp.Move, Owner.Creature, this, cardPlay);
             }
         }
 

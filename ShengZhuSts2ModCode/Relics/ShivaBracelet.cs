@@ -97,7 +97,7 @@ public class ShivaBracelet : ShengZhuSts2ModRelic
         Flash();
         // MainFile.Logger.Info($"【西瓦手镯】准备重放：玩家={Owner?.NetId}，原卡={FormatCard(sourceCard)}，出牌序号={FormatPlayIndex(cardPlay)}，目标={FormatTarget(cardPlay.Target)}，触发前剩余={remainingBeforeReplay}，扣除后剩余={_remainingReplaysThisTurn}。");
 
-        CardModel replayCard = sourceCard.CreateDupe();
+        CardModel replayCard = sourceCard.CreateDupe(Owner);
         replayCard.ExhaustOnNextPlay = true;
         // MainFile.Logger.Info($"【西瓦手镯】创建重放复制牌：原卡={FormatCard(sourceCard)}，复制牌={FormatCard(replayCard)}，复制牌下次打出后消耗={replayCard.ExhaustOnNextPlay}。");
 

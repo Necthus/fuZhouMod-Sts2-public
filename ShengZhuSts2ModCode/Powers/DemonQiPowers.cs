@@ -743,7 +743,7 @@ public class EarthDemonPower : ShengZhuSts2ModPower
         }
 
         int blockGain = Math.Max(1, Owner.MaxHp / 8);
-        await CreatureCmd.Damage(choiceContext, Owner, Math.Max(1, Amount), ValueProp.Unblockable | ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(choiceContext, Owner, Math.Max(1, Amount), ValueProp.Unblockable | ValueProp.Unpowered, Owner, null, null);
         await CreatureCmd.GainBlock(Owner, blockGain, ValueProp.Unpowered, null);
     }
 }

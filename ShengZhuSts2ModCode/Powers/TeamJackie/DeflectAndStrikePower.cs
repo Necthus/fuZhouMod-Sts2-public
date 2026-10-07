@@ -72,7 +72,7 @@ public class DeflectAndStrikePower : ShengZhuSts2ModPower
         }
 
         Flash();
-        await CreatureCmd.Damage(choiceContext, dealer, reflectedDamage, ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(choiceContext, dealer, reflectedDamage, ValueProp.Unpowered, Owner, null, null);
         MainFile.Logger.Info($"【借力打力】完整格挡后反弹敌人意图伤害：来源={dealer.Monster.Id.Entry}，伤害={reflectedDamage}。");
     }
 

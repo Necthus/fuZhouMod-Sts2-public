@@ -47,7 +47,7 @@ public class BlackHandCloseNet : BlackHandGangCard
             await ConsumeBlackHand(choiceContext, cardPlay.Target, extraHits * BlackHandPerExtraHit);
             for (int i = 0; i < extraHits && !cardPlay.Target.IsDead; i++)
             {
-                await CreatureCmd.Damage(choiceContext, cardPlay.Target, previewMainDamage, ValueProp.Move | ValueProp.Unpowered, Owner.Creature, this);
+                await CreatureCmd.Damage(choiceContext, cardPlay.Target, previewMainDamage, ValueProp.Move | ValueProp.Unpowered, Owner.Creature, this, cardPlay);
             }
         }
 
@@ -95,6 +95,7 @@ public class BlackHandCloseNet : BlackHandGangCard
             rawDamage,
             ValueProp.Move,
             card,
+            null,
             ModifyDamageHookType.All,
             CardPreviewMode.Normal,
             out _);

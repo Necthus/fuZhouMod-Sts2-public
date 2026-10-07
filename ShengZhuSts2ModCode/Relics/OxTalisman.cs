@@ -138,7 +138,7 @@ public class OxTalisman : ShengZhuSts2ModRelic, ITalismanRightClickable, ITalism
     /// <summary>
     /// 修改攻击牌伤害：牛符咒激发时，在加法修正阶段额外增加一次当前伤害，使卡牌预览与实际结算都显示为翻倍后数值。
     /// </summary>
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (!_activated || _cooldownTurnsRemaining > 0)
         {

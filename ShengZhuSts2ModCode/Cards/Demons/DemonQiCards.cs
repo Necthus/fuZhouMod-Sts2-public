@@ -78,7 +78,7 @@ public class CardMountainDemonQi : ShengZhuSts2ModCard
             return;
         }
 
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, damage, ValueProp.Move, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, damage, ValueProp.Move, Owner.Creature, this, cardPlay);
         if (!cardPlay.Target.IsAlive)
         {
             int maxHpGain = Math.Max(1, (int)DynamicVars["Magic"].BaseValue);
@@ -163,7 +163,7 @@ public class CardWaterDemonQi : ShengZhuSts2ModCard
         }
 
         IReadOnlyList<Creature> enemies = Owner.Creature.CombatState.HittableEnemies.ToList();
-        await CreatureCmd.Damage(choiceContext, enemies, DynamicVars.Damage.BaseValue, ValueProp.Move, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, enemies, DynamicVars.Damage.BaseValue, ValueProp.Move, Owner.Creature, this, cardPlay);
 
         int amount = (int)DynamicVars["Magic"].BaseValue;
         foreach (Creature enemy in enemies.Where(enemy => enemy.IsAlive))
@@ -532,7 +532,7 @@ public class CardThunderDemonQi : ShengZhuSts2ModCard
             damage = finalDamage;
         }
 
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, damage, ValueProp.Move, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, damage, ValueProp.Move, Owner.Creature, this, cardPlay);
         EnergyCost.AddThisCombat(-1, true);
 
         // 永久成长只写主牌组原卡；当前战斗临时牌同步显示，避免只长在临时对象上导致预览和SL丢值。

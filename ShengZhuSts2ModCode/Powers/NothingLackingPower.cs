@@ -114,7 +114,7 @@ public class NothingLackingPower : ShengZhuSts2ModPower
             return;
         }
 
-        await CreatureCmd.Damage(choiceContext, target, healAndDamage, ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(choiceContext, target, healAndDamage, ValueProp.Unpowered, Owner, null, null);
         MainFile.Logger.Info($"【我什么都不缺了】回合开始触发：已损失生命={lostHp}，恢复={healAndDamage}，对{target.Name}造成伤害={healAndDamage}。");
     }
 

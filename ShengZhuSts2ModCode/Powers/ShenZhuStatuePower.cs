@@ -172,7 +172,7 @@ public class ShenZhuStatuePower : ShengZhuSts2ModPower
     /// <summary>
     /// 石像旧版内置虚弱入口：当前按平衡需求停用，保留方法方便以后恢复。
     /// </summary>
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         // 旧逻辑会让石像形态的普通攻击伤害降低至 75%。现在只屏蔽，不删除，方便后续需要时恢复。
         return 1m;
