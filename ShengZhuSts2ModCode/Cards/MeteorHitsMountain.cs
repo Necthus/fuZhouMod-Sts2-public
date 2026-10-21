@@ -29,11 +29,8 @@ public class MeteorHitsMountain : AhFuCard
 
         int hitCount = (int)DynamicVars["Magic"].BaseValue;
 
-        // 连续攻击指定次数
-        for (int i = 0; i < hitCount; i++)
-        {
-            await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
-        }
+        // 三段属于同一次攻击：活力等“下一次攻击”效果在整次攻击结束后消耗。
+        await CommonActions.CardAttack(this, cardPlay, hitCount).Execute(choiceContext);
 
         // 阿福连招激活：获得活力（VigorPower），下次攻击伤害增加
         if (IsAfuComboActive())

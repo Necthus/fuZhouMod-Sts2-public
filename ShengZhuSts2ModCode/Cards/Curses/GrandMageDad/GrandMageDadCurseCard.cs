@@ -15,6 +15,12 @@ namespace ShengZhuSts2Mod.ShengZhuSts2ModCode.Cards.Curses.GrandMageDad;
 public abstract class GrandMageDadCurseCard : ShengZhuSts2ModCard
 {
     /// <summary>
+    /// 老爹专属诅咒只由指定机制塞入，不参与发现等战斗随机生牌。
+    /// 该标记不限制老爹直接创建卡牌并加入弃牌堆。
+    /// </summary>
+    public override bool CanBeGeneratedInCombat => false;
+
+    /// <summary>
     /// 当前诅咒是否仍在等待支付代价。
     /// </summary>
     [SavedProperty(SerializationCondition.AlwaysSave)]

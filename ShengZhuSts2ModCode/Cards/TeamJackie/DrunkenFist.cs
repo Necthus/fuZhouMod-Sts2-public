@@ -1,4 +1,5 @@
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -37,8 +38,16 @@ public class DrunkenFist : TeamJackieCard
         }
 
         int hitCount = Math.Max(0, ResolveEnergyXValue());
+        if (hitCount == 0 || !Owner.Creature.CombatState.GetOpponentsOf(Owner.Creature).Any(creature => creature.IsAlive && !creature.IsDead))
+        {
+            return;
+        }
+
         int minDamage = (int)DynamicVars["MinDamage"].BaseValue;
         int maxDamage = (int)DynamicVars["MaxDamage"].BaseValue;
+        // 每段保留独立随机数，但整张牌作为同一次攻击结算活力等攻击钩子。
+        // 提前击杀所有敌人时，await using 仍会完成攻击结束结算。
+        await using var attack = await AttackCommand.CreateContextAsync(Owner.Creature.CombatState, choiceContext, cardPlay);
         for (int i = 0; i < hitCount; i++)
         {
             List<Creature> enemies = Owner.Creature.CombatState.GetOpponentsOf(Owner.Creature)
@@ -50,7 +59,8 @@ public class DrunkenFist : TeamJackieCard
             }
 
             int damage = StableRandomHelper.NextIntInclusive(Owner, minDamage, maxDamage);
-            await CreatureCmd.Damage(choiceContext, enemies, damage, ValueProp.Move, Owner.Creature, this, cardPlay);
+            var results = await CreatureCmd.Damage(choiceContext, enemies, damage, ValueProp.Move, Owner.Creature, this, cardPlay);
+            attack.AddHit(results);
         }
     }
 }

@@ -27,7 +27,7 @@ using ShengZhuSts2Mod.ShengZhuSts2ModCode.Events;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Models;
 using ShengZhuSts2Mod.ShengZhuSts2ModCode.Services;
 
-internal class Program
+internal partial class Program
 {
     static readonly Harmony Harmony = new("ShengZhuRegression.NativeIsolation");
     static bool NoEditor(ref bool __result) { __result = false; return false; }
@@ -217,7 +217,14 @@ internal class Program
         MegaCrit.Sts2.Core.Multiplayer.Serialization.ModelIdSerializationCache.Init();
         ModelDb.InitIds();
         new Harmony("ShengZhuRegression.ModPatches").PatchAll(typeof(PigTalisman).Assembly);
+        // Register the same upgrade hook BaseLib installs in-game; its Godot
+        // initializer is not run in this console fixture.
+        Harmony.CreateClassProcessor(typeof(BaseLib.Abstracts.ConstructedCardModel).Assembly
+            .GetType("BaseLib.Patches.Utils.UpgradeInternalPatch", throwOnError: true)!).Patch();
+        Harmony.CreateClassProcessor(typeof(BaseLib.Extensions.DynamicVarExtensions)
+            .GetNestedType("CloneTooltips", BindingFlags.NonPublic)!).Patch();
         Console.WriteLine("PASS all mod Harmony patches resolve on installed beta");
+        await VerifyMultiHitVigor();
         var (player, state, enemies) = Combat();
         var consumed = state.CreateCard<StrikeIronclad>(player);
         player.PlayerCombatState!.Hand.AddInternal(consumed);
