@@ -81,7 +81,7 @@ public class PanKuBoxEvent : CustomEventModel
             return;
         }
 
-        await CreatureCmd.LoseMaxHp(new BlockingPlayerChoiceContext(), Owner.Creature, MaxHpLoss, false);
+        await CreatureCmd.LoseMaxHp(new BlockingPlayerChoiceContext(), Owner.Creature, MaxHpLoss, cardSource: null);
         await GivePanKuBox();
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.PAY_MAX_HP.description"));
     }

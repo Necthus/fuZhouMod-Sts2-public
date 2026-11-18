@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Entities.Merchant;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace ShengZhuSts2Mod.ShengZhuSts2ModCode.Helpers;
 
@@ -96,13 +97,13 @@ internal static class HistoryBookRewriteManager
     /// <param name="source">刷新来源。</param>
     private static void RefreshMerchantEntriesForPlayer(Player player, string source)
     {
-        if (player.RunState.CurrentRoom is not MerchantRoom merchantRoom)
+        if (player.RunState.CurrentRoom is not MerchantRoom)
         {
             MainFile.Logger.Info($"【岁月史书残卷】商店价格刷新跳过：来源={source}，玩家={player.NetId}，原因=当前房间不是商店。");
             return;
         }
 
-        MerchantInventory? inventory = merchantRoom.Inventories.FirstOrDefault(item => item.Player.NetId == player.NetId);
+        MerchantInventory? inventory = RunManager.Instance.MerchantSynchronizer?.GetInventoryFor(player);
         if (inventory == null || inventory.Player.NetId != player.NetId)
         {
             MainFile.Logger.Info($"【岁月史书残卷】商店价格刷新跳过：来源={source}，目标玩家={player.NetId}，库存玩家={inventory?.Player.NetId.ToString() ?? "空"}，原因=仅刷新目标玩家自己的商店库存。");

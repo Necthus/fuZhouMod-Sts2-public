@@ -213,7 +213,7 @@ public class BountyPower : ShengZhuSts2ModPower, IBlackHandAppliedListener
     /// <param name="wasRemovalPrevented">死亡是否被阻止。</param>
     /// <param name="deathAnimLength">死亡动画时长。</param>
     /// <returns>异步任务。</returns>
-    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, CardModel? source, bool wasRemovalPrevented, float deathAnimLength)
     {
         if (wasRemovalPrevented || Owner?.Player == null)
         {

@@ -3,14 +3,14 @@
   "name": "圣主历险记",
   "author": "Necthus",
   "description": "原作者：黑白大彩电。\n本版本作者、修复与维护：Necthus。\n\n“我是山之主，火之魂，远古的八大恶魔之首！” 曾经统治大地的恶魔首领圣主，如今在尖塔中苏醒。他失去了引以为傲的魔力，十二个符咒散落在塔的各处。为了找回昔日的荣光，他必须重新收集符咒，率领黑影兵团席卷塔尖...\n\n 该mod出现问题或觉得设计不好的地方都欢迎您的反馈，会尽快修复问题的，感谢各位捧场。\n\n QQ交流群： 598295851 \n\n \"I am the Lord of the Mountains, the Soul of Fire, the first of the Eight Ancient Demon Sorcerers!\"\n Shendu, the supreme Demon Sorcerer who once ruled the earth, now awakens within the Spire. Stripped of his proud magic, his immense power now lies divided among the Twelve Talismans scattered throughout the Spire. To reclaim his former glory, he must gather the Talismans once more and command the Shadowkhan to conquer the Spire...\n\n If you encounter any bugs or have any suggestions regarding the mechanics and design, please feel free to leave a comment! I will read your feedback and fix issues as quickly as possible. Thank you all for playing and supporting this mod!\n\n",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "has_pck": true,
   "has_dll": true,
-  "min_game_version": "0.111.0",
+  "min_game_version": "0.113.1",
   "dependencies": [
     {
       "id": "BaseLib",
-      "min_version": "3.4.7"
+      "min_version": "3.4.8"
     }
   ],
   "affects_gameplay": true,

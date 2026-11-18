@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Text.Json;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
@@ -109,11 +108,6 @@ public class TalismanLocator : ShengZhuSts2ModRelic, ITalismanRightClickable
         ["西瓦的手镯"] = static () => ModelDb.Event<ShivaBraceletEvent>(),
         ["岁月史书"] = static () => ModelDb.Event<HistoryBookEvent>()
     };
-
-    /// <summary>
-    /// 遗物奖励在展示阶段已经生成了内部遗物，但公开的 ClaimedRelic 只有领取后才有值。
-    /// </summary>
-    private static readonly FieldInfo? RelicRewardRelicField = typeof(RelicReward).GetField("_relic", BindingFlags.Instance | BindingFlags.NonPublic);
 
     /// <summary>
     /// 旧版存档字段：本局选人界面固化的剧情事件替换楼层。
@@ -1334,7 +1328,7 @@ public class TalismanLocator : ShengZhuSts2ModRelic, ITalismanRightClickable
     /// </summary>
     private static RelicModel? GetRewardRelic(RelicReward relicReward)
     {
-        return RelicRewardRelicField?.GetValue(relicReward) as RelicModel;
+        return relicReward.Relic;
     }
 
     /// <summary>

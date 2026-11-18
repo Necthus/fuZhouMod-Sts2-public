@@ -329,6 +329,7 @@ internal partial class Program
         Assert(player.PlayerCombatState.Hand.Cards.Any(c => c.Type == CardType.Attack && c.EnergyCost.GetWithModifiers(CostModifiers.All) == 0 && c.Keywords.Contains(CardKeyword.Exhaust)), "Rat did not generate zero-cost exhausting attack");
         Console.WriteLine("PASS RatTalisman transforms a curse into a zero-cost exhausting attack");
         StoryEventRegression();
+        await NovemberCompatibilityRegression();
         Console.WriteLine("All gameplay regression scenarios passed.");
     }
 }
